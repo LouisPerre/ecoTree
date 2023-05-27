@@ -1,23 +1,25 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import CountdownComponent from './components/CountdownComponent';
 
 function App() {
+  const [questionNumber, setQuestionNumber] = useState(1)
+
+  const handleDone = () => {
+    setQuestionNumber((prevQuestionNumber) => prevQuestionNumber + 1)
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h2>Question {questionNumber}</h2>
+      <CountdownComponent nb={questionNumber} onDone={handleDone} />
+      <div className='quizzContainer'>
+        <h2>Your question is :</h2>
+        <div className='quizzButtonContainer'>
+          <button onClick={handleDone} className='true'>True</button>
+          <button onClick={handleDone} className='false'>False</button>
+        </div>
+      </div>
     </div>
   );
 }
